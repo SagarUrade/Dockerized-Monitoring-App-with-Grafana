@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sagar Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #0f172a;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid #1f2937;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: #38bdf8;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      position: relative;
+      padding-bottom: 0.15rem;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #38bdf8, #a855f7);
+      transition: width 0.25s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Layout */
+    main {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3rem;
+    }
+
+    section {
+      padding: 3rem 0;
+      border-bottom: 1px solid #1f2937;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.1);
+      color: #38bdf8;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .muted {
+      color: #9ca3af;
+      font-size: 0.95rem;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+      gap: 2.5rem;
+      align-items: center;
+      padding-top: 2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 3vw + 1rem, 2.7rem);
+      line-height: 1.15;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(90deg, #38bdf8, #a855f7);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      color: #9ca3af;
+      font-size: 0.98rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-primary,
+    .btn-outline {
+      padding: 0.55rem 1.1rem;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease,
+        border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #38bdf8, #a855f7);
+      color: #0b1120;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 35px rgba(56, 189, 248, 0.6);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #e5e7eb;
+      border-color: #4b5563;
+    }
+
+    .btn-outline:hover {
+      background: #111827;
+      border-color: #9ca3af;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top left, #1d283a, #020617);
+      border-radius: 1rem;
+      border: 1px solid #1f2937;
+      padding: 1.5rem 1.3rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-card h3 {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-highlight {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .hero-stat {
+      padding: 0.7rem 0.7rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid #111827;
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 1rem;
+      color: #e5e7eb;
+    }
+
+    .hero-stat span {
+      color: #9ca3af;
+      font-size: 0.8rem;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.6fr);
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+
+    .about-text p {
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .about-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid #374151;
+      color: #d1d5db;
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    /* Skills */
+    .skills {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.7fr);
+      gap: 2.5rem;
+    }
+
+    .skill-group {
+      margin-bottom: 1.3rem;
+    }
+
+    .skill-group h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #9ca3af;
+      margin-bottom: 0.35rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .skill-tag {
+      font-size: 0.78rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(55, 65, 81, 0.8);
+      color: #e5e7eb;
+    }
+
+    .skill-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.4rem;
+    }
+
+    .skill-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.8rem;
+    }
+
+    .skill-bar-label {
+      display: flex;
+      justify-content: space-between;
+      color: #9ca3af;
+    }
+
+    .bar-track {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: #0b1120;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #38bdf8, #a855f7);
+      transform-origin: left;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.2rem;
+    }
+
+    .project-card {
+      background: #020617;
+      border-radius: 0.9rem;
+      border: 1px solid #1f2937;
+      padding: 1rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: #38bdf8;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .project-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #9ca3af;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-title {
+      font-size: 0.98rem;
+      margin-bottom: 0.35rem;
+      color: #e5e7eb;
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: #9ca3af;
+      margin-bottom: 0.7rem;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: #9ca3af;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .project-links a {
+      font-size: 0.78rem;
+      color: #38bdf8;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr);
+      gap: 2.5rem;
+    }
+
+    .contact-details p {
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .contact-info {
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+    }
+
+    .contact-info div {
+      margin-bottom: 0.35rem;
+    }
+
+    .contact-info span {
+      color: #9ca3af;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+    }
+
+    input,
+    textarea {
+      background: #020617;
+      border: 1px solid #1f2937;
+      border-radius: 0.55rem;
+      padding: 0.6rem 0.7rem;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-note {
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #1f2937;
+      padding: 1rem 1.25rem 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero,
+      .about-grid,
+      .skills,
+      .projects-grid,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 650px) {
+      main {
+        padding-top: 1.7rem;
+      }
+
+      section {
+        padding: 2.3rem 0;
+      }
+
+      .projects-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-card {
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">SAGAR • PORTFOLIO</div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="home">
+      <div class="hero">
+        <div>
+          <div class="tag">College Student • Aspiring DevOps & Cloud Engineer</div>
+          <h1 class="hero-title">
+            Hi, I'm <span>Sagar</span> — building my skills in DevOps & AWS Cloud.
+          </h1>
+          <p class="hero-subtitle">
+            Highly motivated DevOps & AWS Cloud enthusiast with hands-on experience in cloud services, Docker, Linux, Git, and monitoring tools. Skilled in problem-solving and eager to contribute to organizational growth while continuously learning new technologies.
+          <div class="hero-buttons">
+            <a href="#projects" class="btn-primary">
+              View Projects →
+            </a>
+            <a href="#contact" class="btn-outline">
+              Contact Me
+            </a>
+          </div>
+          <div class="hero-meta">
+            <span>🎓 MSc • Computer Application</span>
+            <span>📍 Pune, Maharashtra</span>
+            <span>💻 Open to Internships</span>
+            <span>💻 Open to Job</span>
+          </div>
+        </div>
+<!--
+        <aside class="hero-card">
+          <h3>Snapshot</h3>
+          <p class="hero-highlight">
+            Focused on learning DevOps & Cloud through hands‑on projects.
+          </p>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <strong>8+</strong>
+              <span>Projects completed</span>
+            </div>
+            <div class="hero-stat">
+              <strong>3+</strong>
+              <span>Languages (JS, Python, C++)</span>
+            </div>
+            <div class="hero-stat">
+              <strong>2+</strong>
+              <span>DevOps tools (Git, Docker)</span>
+            </div>
+            <div class="hero-stat">
+              <strong>Always</strong>
+              <span>Ready to learn 🚀</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  -->
+    <!-- About -->
+    <section id="about">
+      <span class="tag">About</span>
+      <h2 class="section-title">Who am I?</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I am Sagar Urade, an MSc Computer Applications student at MIT Arts, Commerce and Science College with a strong interest in DevOps and  Cloud Computing .
+          </p>
+          <p>
+            My technical skills include DevOps tools like Git, Docker, Jenkins, Terraform, Ansible, and Grafana, along with hands-on experience in AWS services such as EC2, VPC, IAM, S3, and Load Balancing. I also enjoy learning how to containerize and deploy applications efficiently using Docker and GitHub.
+          </p>
+          <p>
+            Beyond coding, I enjoy exploring open-source projects, reading tech blogs, and building small side projects that challenge me to learn and grow as a developer.
+          </p>
+        </div>
+        <div>
+          <div class="about-badges">
+            <span class="badge">DevOps Tools:  Git, Ansible, Terraform, Docker, Grafana </span>
+            <span class="badge">Cloud: Amazon Web Services</span>
+            <span class="badge">Operating System: Linux (Ubuntu)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <span class="tag">Skills</span>
+      <h2 class="section-title">What I work with</h2>
+      <div class="skills">
+        <div>
+          <div class="skill-group">
+            <h4>DevOps</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">Ansible</span>
+              <span class="skill-tag">Terraform</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Grafana</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Cloud</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">Amazon Web Services (AWS)</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Programming & Others</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Linux</span>
+              <span class="skill-tag">GitHub</span>
+              <span class="skill-tag">VS Code</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="skill-bars">
+            <div class="skill-bar">
+              <div class="skill-bar-label">
+                <span>Git</span>
+                <span>95%</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: 80%;"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-label">
+                <span>Docker</span>
+                <span>90%</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: 65%;"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-label">
+                <span>Grafana</span>
+                <span>85%</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: 55%;"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-label">
+                <span>AWS & Linux</span>
+                <span>90%</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: 60%;"></div>
+              </div>
+            </div>
+          </div>
+          <p class="muted" style="margin-top:0.8rem;">
+            These percentages are just a rough idea of my current comfort level. I'm constantly practicing to improve them through new projects and challenges.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <span class="tag">Projects</span>
+      <h2 class="section-title">Things I've built</h2>
+      <p class="muted">
+        A few mini projects that show what I'm learning. Click through to see the code and demos.
+      </p>
+      <div class="projects-grid">
+        <article class="project-card">
+          <div>
+            <div class="project-tag">AWS cloud</div>
+            <h3 class="project-title">Setting Up VPCs and EC2 Instances with Terraform</h3>
+            <p class="project-desc">• Successfully designed and implemented a robust AWS cloud infrastructure using Terraform, focusing on the automation
+of VPC, subnet, and EC2 instance provisioning. <br>
+• This project showcases my ability to streamline deployment processes, enhance reproducibility, and maintain version
+control over Infrastructure setups. 
+<br>
+• Tools and Technologies Used: Terraform, AWS, VS Code .
+            </p>
+          </div>
+          <div class="project-meta">
+            <div>AWS VPCs • AWS EC2• Terraform • VS Code  • AWS Subnet • Github</div>
+            <div class="project-links">
+              
+              <a href="https://github.com/SagarUrade/EC2_VPC_Subnet_Terraform_Project" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <div class="project-tag">Static website on AWS</div>
+            <h3 class="project-title">Utilizing S3 for Hosting and Route 53 for DNS Management</h3>
+            <p class="project-desc">
+              • Successfully designed and deployed a live static website on AWS using Amazon S3 for hosting and Route 53 for DNS
+management.<br>
+• Created and launched a fully functional static website, achieving 100% uptime during the testing phase.<br>
+• This project showcases my ability to leverage AWS services to create high-availability and scalable web solutions. <br>
+• Tools and Technologies Used: Amazon S3 , Amazon Route 53
+            </p>
+          </div>
+          <div class="project-meta">
+            <div>AWS Cloud • AWS S3 • Route 53 • Vs Code • AWS EC2</div>
+            <div class="project-links">
+              <a href="https://github.com/SagarUrade/Static-Website-On-AWS" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </article>
+<!--
+<article class="project-card">
+  <div>
+    <div class="project-tag">DevOps</div>
+    <h3 class="project-title">Dockerized Portfolio</h3>
+    <p class="project-desc">
+      Containerized version of this portfolio running on a minimal Linux server using Docker and Nginx.
+    </p>
+  </div>
+  <div class="project-meta">
+    <div>Docker • Nginx</div>
+    <div class="project-links">
+      <a href="#" target="_blank">Live Demo</a>
+      <a href="#" target="_blank">GitHub</a>
+    </div>
+  </div>
+</article>
+-->
+
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <span class="tag">Contact</span>
+      <h2 class="section-title">Let's connect</h2>
+      <div class="contact-grid">
+        <div class="contact-details">
+          <p>
+            Have an internship, project idea, or just want to say hi? Feel free to reach out. I'm always open to networking, feedback, and collaboration.
+          </p>
+          <div class="contact-info">
+            <div><span>Email:</span> sagarurade50@gmail.com</div>
+            <div><span>GitHub:</span> https://github.com/SagarUrade</div>
+            <div><span>LinkedIn:</span> https://www.linkedin.com/in/sagar-urade-bab503224/</div>
+          </div>
+        </div>
+        <div>
+          <form>
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Your name" required />
+
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com" required />
+
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Write your message here..." required></textarea>
+
+            <button type="submit" class="btn-primary" style="border:none; margin-top:0.4rem;">
+              Send Message
+            </button>
+            <p class="form-note">
+              This demo form doesn't send emails yet — you can later connect it to a backend, form service, or Google Sheets.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Sagar Urade
+  </footer>
+</body>
+</html>
